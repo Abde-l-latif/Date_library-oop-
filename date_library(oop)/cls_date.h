@@ -8,10 +8,10 @@ using namespace std;
 
 class cls_date
 {
-private : 
-	short _day; 
-	short _month; 
-	short _year; 
+private:
+	short _day;
+	short _month;
+	short _year;
 	string convert_date_to_string()
 	{
 		string text = "";
@@ -20,18 +20,17 @@ private :
 		text += to_string(_year);
 		return text;
 	}
-
-public : 
+public:
 
 	cls_date()
 	{
 		time_t time_sec = time(0);
 		tm* now = localtime(&time_sec);
-		_day = now->tm_mday; 
+		_day = now->tm_mday;
 		_month = now->tm_mon + 1;
 		_year = now->tm_year + 1900;
 	}
-	cls_date(short _day , short _month , short _year)
+	cls_date(short _day, short _month, short _year)
 	{
 		this->_day = _day;
 		this->_month = _month;
@@ -39,7 +38,7 @@ public :
 	}
 	cls_date(short _day, short _year)
 	{
-		convert_days_to_date(_day , _year); 
+		convert_days_to_date(_day, _year);
 		this->_year = _year;
 	}
 
@@ -49,7 +48,7 @@ public :
 	}
 	short day()
 	{
-		return _day; 
+		return _day;
 	}
 	void set_month(short _month)
 	{
@@ -81,10 +80,10 @@ public :
 	{
 		return get_days_of_month(_year, _month);
 	}
-	void convert_days_to_date(short days , short year)
+	void convert_days_to_date(short days, short year)
 	{
 		short month = 1;
-	
+
 		while (get_days_of_month(year, month) < days)
 		{
 			days -= get_days_of_month(year, month);
@@ -93,14 +92,15 @@ public :
 				month++;
 			}
 			else {
-				month = 1; 
+				month = 1;
 				year++;
 			}
 		}
-	
-		this->_month = month; 
-		this->_day = days; 
+
+		this->_month = month;
+		this->_day = days;
 	}
+
 	void print()
 	{
 		cout << "Date is :  " << convert_date_to_string() << endl;
@@ -128,7 +128,7 @@ public :
 	}
 	int get_minutes_of_year()
 	{
-		return get_minutes_of_year(_year); 
+		return get_minutes_of_year(_year);
 	}
 	static int get_seconds_of_year(short year)
 	{
@@ -169,13 +169,13 @@ public :
 		int a = (14 - date.month()) / 12;
 		int y = date.year() - a;
 		int m = date.month() + (12 * a) - 2;
-	
-	
+
+
 		int index = (date.day() + y + (y / 4) - (y / 100) + (y / 400) + (31 * m / 12)) % 7;
-	
+
 		return index;
 	}
-	static int calc_index_of_day(short month , short year, short day)
+	static int calc_index_of_day(short month, short year, short day)
 	{
 		int a = (14 - month) / 12;
 		int y = year - a;
@@ -206,7 +206,7 @@ public :
 		string months_names[] = {
 			"" ,"Janury" , "fabrury" , "march" , "april" , "may" , "june" , "july" , "augost" , "september" , "october" , "november" , "december"
 		};
-	
+
 		return months_names[date.month()];
 	}
 	static string month_name(short month)
@@ -224,44 +224,44 @@ public :
 	static void print_days_calender()
 	{
 		string arr[7] = { "sun" , "mon" , "tue" , "wed" , "thu" , "fri" , "sat" };
-	
+
 		for (short i = 0; i < 7; i++)
 			cout << left << setw(6) << arr[i];
-	
+
 		cout << endl;
 	}
 	static void print_days_in_month(cls_date date)
 	{
 		short counter = 0;
 		short days_in_month = get_days_of_month(date.year(), date.month());
-	
+
 		for (short j = 0; j < calc_index_of_day(date); j++)
 		{
 			cout << left << setw(6) << "";
 			counter++;
 		}
-	
+
 		for (short i = 1; i <= days_in_month; i++)
 		{
 			if (counter == 7)
 			{
 				cout << endl;
-				counter = 0; 
+				counter = 0;
 			}
 
 			cout << left << setw(6) << i;
 			counter++;
 		}
-	
+
 		cout << endl;
-	
+
 	}
-	static void print_days_in_month(short month , short year)
+	static void print_days_in_month(short month, short year)
 	{
 		short counter = 0;
 		short days_in_month = get_days_of_month(year, month);
 
-		for (short j = 0; j < calc_index_of_day(month , year , 1); j++)
+		for (short j = 0; j < calc_index_of_day(month, year, 1); j++)
 		{
 			cout << left << setw(6) << "";
 			counter++;
@@ -296,7 +296,7 @@ public :
 	}
 	void print_calender_of_month()
 	{
-		print_calender_of_month(*this); 
+		print_calender_of_month(*this);
 	}
 	static void year_calender_header(cls_date date)
 	{
@@ -306,8 +306,8 @@ public :
 	}
 	void year_calender_header()
 	{
-		year_calender_header(*this); 
-	}	
+		year_calender_header(*this);
+	}
 	static void print_year_calender(cls_date date)
 	{
 		year_calender_header(date);
@@ -331,23 +331,23 @@ public :
 		{
 			days_sum += get_days_of_month(date.year(), i);
 		}
-	
+
 		days_sum += date.day();
-	
+
 		return days_sum;
 	}
 	short calc_days_spent()
 	{
-		return calc_days_spent(*this); 
+		return calc_days_spent(*this);
 	}
-	static void add_days(cls_date &date , int extra)
+	static void add_days(cls_date& date, int extra)
 	{
 		short YEAR = date.year();
 		short MONTH = date.month();
 		short DAYS = date.day();
-	
+
 		DAYS += extra;
-	
+
 		while (DAYS > get_days_of_month(YEAR, MONTH))
 		{
 			DAYS -= get_days_of_month(YEAR, MONTH);
@@ -361,14 +361,14 @@ public :
 				MONTH++;
 			}
 		}
-	
+
 		date.set_day(DAYS);
 		date.set_year(YEAR);
 		date.set_month(MONTH);
 	}
 	void add_days(int extra)
 	{
-		add_days(*this , extra);
+		add_days(*this, extra);
 	}
 	static bool check_if_date1_equal_to_date2(cls_date date1, cls_date date2)
 	{
@@ -409,7 +409,7 @@ public :
 
 	static void increase_day(cls_date& date)
 	{
-	
+
 		if (is_last_month(date) && is_last_day(date))
 		{
 			date.set_year(date.year() + 1);
@@ -443,9 +443,9 @@ public :
 		else {
 			cls_date temp;
 
-			temp = Date1; 
+			temp = Date1;
 			Date1 = Date2;
-			Date2 = temp; 
+			Date2 = temp;
 
 			while (check_if_date1_before_date2(Date1, Date2))
 			{
@@ -466,7 +466,7 @@ public :
 	}
 	void add_one_week()
 	{
-		add_one_week(*this); 
+		add_one_week(*this);
 	}
 	static void add_week_by_x(cls_date& date, short repeat = 1)
 	{
@@ -482,7 +482,7 @@ public :
 	static void increase_date_by_one_month(cls_date& date)
 	{
 		short days_month = get_days_of_month(date.year(), date.month());
-	
+
 		for (short i = 0; i < days_month; i++)
 		{
 			increase_day(date);
@@ -503,7 +503,7 @@ public :
 	{
 		increase_date_by_x_months(*this, repeat);
 	}
-	
+
 	static void increase_date_by_one_year(cls_date& date)
 	{
 		date.set_year(date.year() + 1);
@@ -517,7 +517,7 @@ public :
 	{
 		increase_date_by_one_year(*this);
 	}
-	static void add_years(cls_date& date, short repeat = 1 )
+	static void add_years(cls_date& date, short repeat = 1)
 	{
 		for (short i = 0; i < repeat; i++)
 		{
@@ -528,7 +528,7 @@ public :
 	{
 		add_years(*this, repeat);
 	}
-	static void add_decade(cls_date & date)
+	static void add_decade(cls_date& date)
 	{
 		add_years(date, 10);
 	}
@@ -544,7 +544,7 @@ public :
 	}
 	void add_decades(short repeat = 1)
 	{
-		add_decades(*this, repeat); 
+		add_decades(*this, repeat);
 	}
 	static void add_one_century(cls_date& date)
 	{
@@ -572,7 +572,7 @@ public :
 	}
 	bool IsFirstDayInMonth()
 	{
-		IsFirstDayInMonth(*this); 
+		IsFirstDayInMonth(*this);
 	}
 	static bool IsFirstMonthInYear(cls_date date)
 	{
@@ -637,7 +637,7 @@ public :
 	{
 		DecreaseDateByXWeeks(*this, NumberOfWeeks);
 	}
-	static void DecreaseDateByOneMonth(cls_date & date)
+	static void DecreaseDateByOneMonth(cls_date& date)
 	{
 		if (IsFirstMonthInYear(date))
 		{
@@ -658,18 +658,18 @@ public :
 	{
 		DecreaseDateByOneMonth(*this);
 	}
-	static void DecreaseDateByXMonths(cls_date & date, short NumberOfMonths)
+	static void DecreaseDateByXMonths(cls_date& date, short NumberOfMonths)
 	{
 		for (short i = 1; i <= NumberOfMonths; i++)
 		{
-			 DecreaseDateByOneMonth(date);
+			DecreaseDateByOneMonth(date);
 		}
 	}
 	void DecreaseDateByXMonths(short NumberOfMonths)
 	{
 		DecreaseDateByXMonths(*this, NumberOfMonths);
 	}
-	static void DecreaseDateByOneYear(cls_date & date)
+	static void DecreaseDateByOneYear(cls_date& date)
 	{
 		date.set_year(date.year() - 1);
 	}
@@ -677,7 +677,7 @@ public :
 	{
 		DecreaseDateByOneYear(*this);
 	}
-	static void DecreaseDateByXYears(cls_date & date, short NumberOfYears)
+	static void DecreaseDateByXYears(cls_date& date, short NumberOfYears)
 	{
 		date.set_year(date.year() - NumberOfYears);
 	}
@@ -685,40 +685,37 @@ public :
 	{
 		DecreaseDateByXYears(*this, NumberOfYears);
 	}
-	static void DecreaseDateByOneDecade(cls_date & date)
+	static void DecreaseDateByOneDecade(cls_date& date)
 	{
 		date.set_year(date.year() - 10);
 	}
 	void DecreaseDateByOneDecade() {
 		DecreaseDateByOneDecade(*this);
 	}
-	static void DecreaseDateByXDecades(cls_date & date, short NumberOfDecades)
+	static void DecreaseDateByXDecades(cls_date& date, short NumberOfDecades)
 	{
 		date.set_year(date.year() - (NumberOfDecades * 10));
 	}
 	void DecreaseDateByXDecades(short NumberOfDecades)
 	{
-		DecreaseDateByXDecades(*this, NumberOfDecades); 
+		DecreaseDateByXDecades(*this, NumberOfDecades);
 	}
-	static void DecreaseDateByOneCentury(cls_date & date)
+	static void DecreaseDateByOneCentury(cls_date& date)
 	{
 		date.set_year(date.year() - 100);
 	}
 	void DecreaseDateByOneCentury()
 	{
-		DecreaseDateByOneCentury(*this); 
+		DecreaseDateByOneCentury(*this);
 	}
-	static void DecreaseDateByOneMillennium(cls_date & date)
+	static void DecreaseDateByOneMillennium(cls_date& date)
 	{
 		date.set_year(date.year() - 1000);
-	} 
+	}
 	void DecreaseDateByOneMillennium()
 	{
-		DecreaseDateByOneMillennium(*this); 
+		DecreaseDateByOneMillennium(*this);
 	}
-
-
-
 
 	static bool IsEndOfWeek(cls_date date)
 	{
@@ -728,8 +725,6 @@ public :
 	{
 		IsEndOfWeek(*this);
 	}
-
-
 	static bool IsWeekEnd(cls_date date)
 	{
 		short DayIndex = calc_index_of_day(date);
@@ -739,8 +734,6 @@ public :
 	{
 		IsWeekEnd(*this);
 	}
-
-
 	static bool IsBusinessDay(cls_date date)
 	{
 		return !IsWeekEnd(date);
@@ -749,11 +742,9 @@ public :
 	{
 		IsBusinessDay(*this);
 	}
-
-
 	static short DaysUntilTheEndOfWeek(cls_date date)
 	{
-		short days = 0; 
+		short days = 0;
 		while (calc_index_of_day(date) != 0)
 		{
 			days++;
@@ -761,27 +752,51 @@ public :
 		}
 		return days;
 	}
-
-	/*short DaysUntilTheEndOfMonth(sDate Date)
+	short DaysUntilTheEndOfWeek()
 	{
-		sDate EndOfMonthDate;
-
-		EndOfMonthDate.Day = NumberOfDaysInAMonth(Date.Year, Date.Month);
-		EndOfMonthDate.Month = Date.Month;
-		EndOfMonthDate.Year = Date.Year;
-
-		return GetDifferenceInDays(Date, EndOfMonthDate, true);
+		return DaysUntilTheEndOfWeek(*this);
 	}
-
-	short DaysUntilTheEndOfYear(sDate Date)
+	static short DaysUntilTheEndOfMonth(cls_date date)
 	{
-		sDate EndOfYearDate;
+		cls_date EndOfMonthDate;
 
-		EndOfYearDate.Day = 31;
-		EndOfYearDate.Month = 12;
-		EndOfYearDate.Year = Date.Year;
+		EndOfMonthDate.set_day(get_days_of_month(date.year(), date.month()));
+		EndOfMonthDate.set_month(date.month());
+		EndOfMonthDate.set_year(date.year());
 
-		return GetDifferenceInDays(Date, EndOfYearDate, true);
-	}*/
+		return GetDifferenceInDays(date, EndOfMonthDate, true);
+	}
+	short DaysUntilTheEndOfMonth()
+	{
+		DaysUntilTheEndOfMonth(*this);
+	}
+	static short DaysUntilTheEndOfYear(cls_date date)
+	{
+		cls_date EndOfYearDate;
+
+		EndOfYearDate.set_day(31);
+		EndOfYearDate.set_month(12);
+		EndOfYearDate.set_year(date.year());
+
+		return GetDifferenceInDays(date, EndOfYearDate, true);
+	}
+	short DaysUntilTheEndOfYear()
+	{
+		DaysUntilTheEndOfYear(*this);
+	}
+	static bool is_validate_date(cls_date date)
+	{
+		return date.day() > get_days_of_month(date.year(), date.month()) ||
+			date.month() > 12 ? false : true;
+	}
+	bool is_validate_date()
+	{
+		is_validate_date(*this);
+	}
+	static void swip(cls_date& date1, cls_date& date2)
+	{
+		cls_date temp = date1;
+		date1 = date2;
+		date2 = temp;
+	}
 };
-
